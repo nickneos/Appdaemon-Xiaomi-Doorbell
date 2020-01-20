@@ -12,7 +12,7 @@ Turn a xiaomi smart button into a smart doorbell  🚪🔔
 * Supports sending a notification to your phone when doorbell is pressed
 * Supports turning on a courtesy light (eg. porch light) when doorbell is pressed
 * Supports flashing lights in your house to visually alert you when doorbell is pressed
-* Supports Google Home to alert you with a custom text-to-speech message
+* Supports Google Home voice prompt to alert you with a custom text-to-speech message
 
 ## Components Needed
 * [Xiaomi Gateway](https://www.gearbest.com/living-appliances/pp_344667.html)
@@ -25,6 +25,25 @@ _Setting up in Home Assistant: [https://www.home-assistant.io/integrations/xiaom
 Install via [HACS](https://hacs.xyz/). Alternatively, place the apps folder and its contents in your appdaemon folder.
 
 ## Configuration
+
+### Configuration Values
+
+| Variable       | Type       | Required | Default                       | Description                                                                                                                                                                                                                |
+| -------------- | ---------- | -------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| module         | string     | True     |                               | Set to `xiaomi_doorbell`                                                                                                                                                                                                   |
+| class          | string     | True     |                               | Set to `Doorbell`                                                                                                                                                                                                          |
+| button         | string     | True     |                               | `entity_id` of the xiaomi button                                                                                                                                                                                           |
+| gw_mac         | string     | True     |                               | The MAC address of your xiaomi gateway. Needs to be formatted without `:` eg. `34ce00880088`                                                                                                                               |
+| click_type     | string     | False    | single                        | For buttons that support multiple click types (eg. single click, double click and long press) specify which one to trigger the doorbell. Valid options are `single`, `double` and `long_click_press`                       |
+| ringtone_id    | integer    | False    | 10                            | The alert tone the gateway will play when button is pressed. Refer [here](https://www.home-assistant.io/integrations/xiaomi_aqara/#services) for valid values                                                              |
+| volume         | integer    | False    | 10                            | Volume of the alert (0 - 100). Not needed if `volume_slider` option is used                                                                                                                                                |
+| volume_slider  | string     | False    |                               | `entity_id` of an `input_number` component in home assistant to use as alert volume control                                                                                                                                |
+| notify_html5   | boolean    | False    | `False`                       | Set to `True` for html5 push notifications to be received on chrome, firefox or android device. Requires `html5` component in home assistant. Refer [here](https://www.home-assistant.io/integrations/html5/) for details. |
+| courtesy_light | dictionary | False    |                               | Use if you want a light to turn on when doorbell is pressed (eg. a porch light). In which, case specify an `entity_id` for the light and `timer` for duration of light to remain on in seconds. Refer to example above.    |
+| flash          | list       | False    |                               | List of lights to flash to alert you that doorbell was pressed                                                                                                                                                             |
+| gh_devices     | list       | False    |                               | List of google home entity id's to alert you with a voice prompt when doorbell is pressed                                                                                                                                  |
+| gh_tts         | string     | False    | "There's someone at the door" | Text to speech message required for google home voice prompt                                                                                                                                                               |
+
 
 ### Example Usage
 
@@ -46,25 +65,11 @@ Any_Description_You_Want:
     - light.kitchen
     - light.dining
     - light.living_room
+  gh_devices:
+    - media_player.google_home_livingroom
+    - media_player.google_home_bedroom
+  gh_tts: "Doorbell pressed"
 ```
-
-### Configuration Values
-
-| Variable       | Type       | Required | Default                       | Description                                                                                                                                                                                                                |
-| -------------- | ---------- | -------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| module         | string     | True     |                               | Set to `xiaomi_doorbell`                                                                                                                                                                                                   |
-| class          | string     | True     |                               | Set to `Doorbell`                                                                                                                                                                                                          |
-| button         | string     | True     |                               | `entity_id` of the xiaomi button                                                                                                                                                                                           |
-| gw_mac         | string     | True     |                               | The MAC address of your xiaomi gateway. Needs to be formatted without `:` eg. `34ce00880088`                                                                                                                               |
-| click_type     | string     | False    | single                        | For buttons that support multiple click types (eg. single click, double click and long press) specify which one to trigger the doorbell. Valid options are `single`, `double` and `long_click_press`                       |
-| ringtone_id    | integer    | False    | 10                            | The alert tone the gateway will play when button is pressed. Refer [here](https://www.home-assistant.io/integrations/xiaomi_aqara/#services) for valid values                                                              |
-| volume         | integer    | False    | 10                            | Volume of the alert (0 - 100). Not needed if `volume_slider` option is used                                                                                                                                                |
-| volume_slider  | string     | False    |                               | `entity_id` of an `input_number` component in home assistant to use as alert volume control                                                                                                                                |
-| notify_html5   | boolean    | False    | `False`                       | Set to `True` for html5 push notifications to be received on chrome, firefox or android device. Requires `html5` component in home assistant. Refer [here](https://www.home-assistant.io/integrations/html5/) for details. |
-| courtesy_light | dictionary | False    |                               | Use if you want a light to turn on when doorbell is pressed (eg. a porch light). In which, case specify an `entity_id` for the light and `timer` for duration of light to remain on in seconds. Refer to example above.    |
-| flash          | list       | False    |                               | List of lights to flash to alert you that doorbell was pressed                                                                                                                                                             |
-| gh_devices     | list       | False    |                               | List of google home entity id's to verbally alert you when doorbell is pressed                                                                                                                                             |
-| gh_tts         | string     | False    | "There's someone at the door" | Text to speech message required for google home alert                                                                                                                                                                      |
 
 <hr/>
 

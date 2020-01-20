@@ -7,8 +7,8 @@
 Turn a xiaomi smart button into a smart doorbell  🚪🔔
 
 ## Components Needed
-* [Xiaomi Gateway](https://www.gearbest.com/living-appliances/pp_344667.html](https://www.gearbest.com/living-appliances/pp_344667.html))
-* [Xiaomi Wireless Button]([https://www.gearbest.com/smart-home-controls/pp_009395405312.html?wid=1349303](https://www.gearbest.com/smart-home-controls/pp_009395405312.html?wid=1349303))
+* [Xiaomi Gateway](https://www.gearbest.com/living-appliances/pp_344667.html)
+* [Xiaomi Wireless Button](https://www.gearbest.com/smart-home-controls/pp_009395405312.html?wid=1349303)
 
 _Setting up in Home Assistant: [https://www.home-assistant.io/integrations/xiaomi_aqara/](https://www.home-assistant.io/integrations/xiaomi_aqara/)_
 

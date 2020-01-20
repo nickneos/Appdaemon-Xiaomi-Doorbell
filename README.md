@@ -1,16 +1,11 @@
 
 # Xiaomi Custom Doorbell 
+
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs) [![homeassistant_community](https://img.shields.io/badge/HA%20community-forum-brightgreen)](https://community.home-assistant.io/) 
 
 <a href="https://www.buymeacoffee.com/so3n" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 Turn a xiaomi smart button into a smart doorbell  🚪🔔
-
-## Components Needed
-* [Xiaomi Gateway](https://www.gearbest.com/living-appliances/pp_344667.html)
-* [Xiaomi Wireless Button](https://www.gearbest.com/smart-home-controls/pp_009395405312.html?wid=1349303)
-
-_Setting up in Home Assistant: [https://www.home-assistant.io/integrations/xiaomi_aqara/](https://www.home-assistant.io/integrations/xiaomi_aqara/)_
 
 ## Features
 * Play one of the built in alerts on the xiaomi gateway or [customize your own](https://www.home-assistant.io/integrations/xiaomi_aqara/#services) when doorbell is pressed
@@ -18,6 +13,12 @@ _Setting up in Home Assistant: [https://www.home-assistant.io/integrations/xiaom
 * Supports turning on a courtesy light (eg. porch light) when doorbell is pressed
 * Supports flashing lights in your house to visually alert you when doorbell is pressed
 * Supports Google Home to alert you with a custom text-to-speech message
+
+## Components Needed
+* [Xiaomi Gateway](https://www.gearbest.com/living-appliances/pp_344667.html)
+* [Xiaomi Wireless Button](https://www.gearbest.com/smart-home-controls/pp_009395405312.html?wid=1349303)
+
+_Setting up in Home Assistant: [https://www.home-assistant.io/integrations/xiaomi_aqara/](https://www.home-assistant.io/integrations/xiaomi_aqara/)_
 
 ## Installing
 
@@ -64,3 +65,7 @@ Any_Description_You_Want:
 | flash          | list       | False    |                               | List of lights to flash to alert you that doorbell was pressed                                                                                                                                                             |
 | gh_devices     | list       | False    |                               | List of google home entity id's to verbally alert you when doorbell is pressed                                                                                                                                             |
 | gh_tts         | string     | False    | "There's someone at the door" | Text to speech message required for google home alert                                                                                                                                                                      |
+
+<hr/>
+
+<a href="https://www.buymeacoffee.com/so3n" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>

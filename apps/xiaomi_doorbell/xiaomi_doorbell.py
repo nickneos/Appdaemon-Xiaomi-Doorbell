@@ -7,6 +7,7 @@ DEFAULT_RINGTONE_ID = 10
 DEFAULT_COURTESY_LIGHT_TIMER = 60
 DEFAULT_NOTIFY_HTML5 = False
 DEFUALT_DOORBELL_VOLUME = 10
+DEFAULT_GH_TTS = "There's someone at the door"
 
 class doorbell(hass.Hass):
 
@@ -21,6 +22,7 @@ class doorbell(hass.Hass):
         self.courtesy_light = self.args.get("courtesy_light")
         self.gh_devices = self.args.get("gh_devices")
         self.notify_html5 = self.args.get("notify_html5", DEFAULT_NOTIFY_HTML5)
+        self.gh_tts = self.args.get("gh_tts", DEFAULT_GH_TTS)
 
         # listener for when doorbell is pressed
         self.listen_event(self.cb_doorbell, "xiaomi_aqara.click",
@@ -61,16 +63,24 @@ class doorbell(hass.Hass):
                                 ringtone_vol = vol)
         
         if self.flash:
-            lights = self.flash
+            if type(self.flash) is list:
+                lights = self.flash
+            else:
+                lights = [self.flash]
+
             for x in lights: 
                 self.flash_bulb(x, 3)
 
         if self.gh_devices and self.anyone_home():
-            msg = ("There's someone at the door")
+            if type(self.gh_devices) is list:
+                ggl_homes = self.gh_devices
+            else:
+                ggl_homes = [self.gh_devices]
+
             for gh in self.gh_devices:
                 if self.get_state(gh) == "off": 
                     self.call_service("tts/google_say", entity_id = gh,
-                                      message = msg)
+                                      message = self.gh_tts)
 
         if self.notify_html5:
             t = time.strftime("%d-%b-%Y %H:%M:%S")
